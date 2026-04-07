@@ -51,8 +51,8 @@ export function AppProvider({ children }: { children: ReactNode }) {
       try {
         const [clientsRes, invoicesRes, quotationsRes, settingsRes] = await Promise.all([
           supabase.from('clients').select('*').order('created_at', { ascending: false }),
-          supabase.from('invoices').select('*').order('created_at', { ascending: false }),
-          supabase.from('quotations').select('*').order('created_at', { ascending: false }),
+          supabase.from('invoices').select('*'),
+          supabase.from('quotations').select('*'),
           supabase.from('company_settings').select('*').limit(1).single(),
         ]);
         if (clientsRes.data && clientsRes.data.length > 0) setClients(clientsRes.data);
